@@ -6,278 +6,377 @@
     <title>Portfolio | Full Stack & Cloud Engineer</title>
     <style>
         :root {
-            /* GitHub Dark Mode Color Palette */
+            /* GitHub Dark Mode Palette */
             --bg-canvas: #0d1117;
             --bg-card: #161b22;
             --border-default: #30363d;
             --text-main: #c9d1d9;
             --text-muted: #8b949e;
             --accent: #58a6ff;
+            --accent-dim: rgba(88, 166, 255, 0.15);
+            --success: #238636;
             --btn-bg: #21262d;
             --btn-hover: #30363d;
-            --skill-tag-bg: rgba(56, 139, 253, 0.15);
-            --skill-tag-text: #58a6ff;
+            --header-line: #F78166; /* GitHub Orange for flair */
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             background-color: var(--bg-canvas);
             color: var(--text-main);
             line-height: 1.6;
-            display: flex;
-            justify-content: center;
-            padding: 2rem;
+            scroll-behavior: smooth;
         }
 
         .container {
-            max-width: 800px;
-            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
-        /* Header Section */
+        /* --- HEADER --- */
         header {
             border-bottom: 1px solid var(--border-default);
             padding-bottom: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 0.5rem;
-        }
-
-        .role {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-
-        .bio {
-            color: var(--text-main);
-            margin-bottom: 1.5rem;
-            max-width: 600px;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            background-color: var(--btn-bg);
-            border: 1px solid var(--border-default);
-            color: var(--accent);
-            padding: 6px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: 0.2s;
-        }
-
-        .btn:hover {
-            background-color: var(--btn-hover);
-            border-color: var(--text-muted);
-        }
-
-        /* Section Styling */
-        section {
             margin-bottom: 3rem;
         }
 
-        h2 {
+        h1 { font-size: 2.5rem; color: white; margin-bottom: 0.5rem; }
+        .role { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 1rem; }
+        .bio { max-width: 600px; margin-bottom: 1.5rem; }
+
+        /* --- TECH NAVIGATOR (The Core Feature) --- */
+        .tech-section { margin-bottom: 4rem; scroll-margin-top: 2rem; }
+        
+        .section-title {
             font-size: 1.5rem;
+            color: white;
             border-bottom: 1px solid var(--border-default);
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
-            color: white;
-        }
-
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-category h3 {
-            font-size: 1rem;
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .tags {
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
             gap: 0.5rem;
         }
 
-        .tag {
-            background-color: var(--skill-tag-bg);
-            color: var(--skill-tag-text);
-            padding: 3px 10px;
-            border-radius: 2em;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        /* Projects Cards */
-        .project-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-default);
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-header {
+        /* The Grid of Tech Buttons */
+        .tech-grid {
             display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
         }
 
-        .project-title {
-            font-size: 1.25rem;
-            font-weight: 600;
+        .tech-btn {
+            background-color: var(--btn-bg);
+            border: 1px solid var(--border-default);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tech-btn:hover {
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+        }
+
+        .tech-btn.active {
+            background-color: var(--accent-dim);
+            border-color: var(--accent);
             color: var(--accent);
         }
 
-        .project-tech {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-family: monospace;
+        /* The Dynamic Skill Detail Card */
+        #skill-detail-panel {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.3s ease;
+            border-left: 4px solid var(--accent);
         }
 
-        .project-desc {
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 1rem;
-            font-size: 0.95rem;
         }
 
-        .project-bullets {
-            list-style-position: inside;
+        .detail-title { font-size: 1.2rem; font-weight: 700; color: white; }
+        .detail-level { 
+            font-size: 0.85rem; 
+            padding: 2px 8px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border-default);
+        }
+
+        /* --- PROJECTS SECTION --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover { transform: translateY(-3px); border-color: var(--text-muted); }
+
+        .project-title { 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            color: var(--accent); 
+            margin-bottom: 0.5rem; 
+            text-decoration: none;
+        }
+
+        .project-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; flex-grow: 1; }
+
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; }
+        
+        .mini-tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            background-color: var(--btn-bg);
+            border: 1px solid var(--border-default);
+            border-radius: 12px;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
-        .project-bullets li {
-            margin-bottom: 0.25rem;
+        .mini-tag:hover { color: var(--accent); border-color: var(--accent); }
+
+        /* --- HOBBIES --- */
+        .hobbies-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .hobby-item {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-default);
         }
 
-        footer {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-default);
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            .project-header { flex-direction: column; gap: 0.25rem; }
-            body { padding: 1rem; }
-        }
+        /* Utilities */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .hidden { display: none !important; }
+        
     </style>
 </head>
 <body>
 
     <div class="container">
         <header>
-            <h1>Hello, I'm [Your Name]</h1>
+            <h1>[Your Name]</h1>
             <div class="role">Full Stack & Cloud Native Engineer</div>
             <p class="bio">
-                Developer with 2 years of experience specializing in the intersection of <strong>Product (React)</strong> and <strong>Platform (Golang/K8s)</strong>. 
-                I build high-performance systems and the GitOps pipelines that deploy them.
+                Specialized in the "Whole Product" lifecycle: React frontends, Golang backends, and the Kubernetes infrastructure that runs them.
             </p>
-            <div class="btn-group">
-                <a href="https://github.com/[your-username]" class="btn">GitHub</a>
-                <a href="mailto:your-email@example.com" class="btn">Contact Me</a>
+            <div>
+                <a href="#" style="color: var(--accent); text-decoration: none; margin-right: 1rem;">GitHub</a>
+                <a href="#" style="color: var(--accent); text-decoration: none;">Email</a>
             </div>
         </header>
 
-        <section>
-            <h2>Technical Stack</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Backend & Systems</h3>
-                    <div class="tags">
-                        <span class="tag">Golang</span>
-                        <span class="tag">Python</span>
-                        <span class="tag">PostgreSQL</span>
-                        <span class="tag">Redis</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>DevOps & Cloud</h3>
-                    <div class="tags">
-                        <span class="tag">Kubernetes</span>
-                        <span class="tag">Docker</span>
-                        <span class="tag">ArgoCD</span>
-                        <span class="tag">GitOps</span>
-                        <span class="tag">Nginx</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Frontend</h3>
-                    <div class="tags">
-                        <span class="tag">React</span>
-                        <span class="tag">TypeScript</span>
-                        <span class="tag">React Native</span>
-                        <span class="tag">Plasmo</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>Featured Engineering</h2>
+        <section id="tech" class="tech-section">
+            <div class="section-title">Technical Stack & Experience</div>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">
+                Click a technology to see my proficiency and filter projects.
+            </p>
             
-            <div class="project-card">
-                <div class="project-header">
-                    <span class="project-title">High-Performance Cloud Storage Engine</span>
-                    <span class="project-tech">Go • Postgres • Docker • Streaming I/O</span>
+            <div class="tech-grid" id="tech-grid"></div>
+
+            <div id="skill-detail-panel">
+                <div class="detail-header">
+                    <div class="detail-title" id="panel-title">Technology Name</div>
+                    <span class="detail-level" id="panel-level">Proficiency</span>
                 </div>
-                <p class="project-desc">
-                    A distributed file storage system modeled after Google Drive architecture. 
-                    Moved beyond standard CRUD by implementing streaming file uploads and recursive database logic.
+                <p id="panel-desc" style="font-size: 0.95rem; color: var(--text-main);">
+                    Description goes here.
                 </p>
-                <ul class="project-bullets">
-                    <li>Engineered <strong>streaming I/O</strong> pipelines in Go to handle large binary uploads with minimal RAM footprint.</li>
-                    <li>Designed a hierarchical file system in <strong>PostgreSQL</strong> using <strong>Recursive CTEs</strong> for O(1) folder traversal.</li>
-                    <li>Implemented full-text search and indexing strategies for efficient file retrieval.</li>
-                    <li>Containerized with <strong>Docker</strong> and deployed via a custom <strong>GitOps</strong> workflow.</li>
-                </ul>
+                <div style="margin-top: 1rem;">
+                    <button class="mini-tag" onclick="resetFilter()" style="background: var(--accent); color: white; border: none;">
+                        Show All Projects
+                    </button>
+                </div>
             </div>
         </section>
 
-        <section>
-            <h2>About Me</h2>
-            <p style="color: var(--text-muted);">
-                I am a "T-shaped" developer. While I can build sleek UIs with <strong>React and React Native</strong>, my passion lies in what happens under the hood. 
-                I have spent the last 2 years deep-diving into <strong>Golang</strong> concurrency patterns and modern <strong>GitOps</strong> deployments (ArgoCD, K8s).
-                <br><br>
-                Currently exploring: <strong>Vector Databases (pgvector)</strong> and AI-driven search architectures.
+        <section id="projects">
+            <div class="section-title">Projects</div>
+            <div class="projects-grid" id="projects-grid">
+                </div>
+            <p id="no-projects-msg" class="hidden" style="text-align: center; color: var(--text-muted); margin-top: 2rem;">
+                No projects found with this specific tech stack.
             </p>
         </section>
 
-        <footer>
-            <p>Built with plain HTML & CSS • Modeled after GitHub Dark UI</p>
+        <section id="hobbies" style="margin-top: 4rem;">
+            <div class="section-title">Interests & Hobbies</div>
+            <div class="hobbies-list">
+                <div class="hobby-item">
+                    <strong>System Design</strong>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Obsessed with distributed systems, consistency patterns, and scaling DBs.</p>
+                </div>
+                <div class="hobby-item">
+                    <strong>Open Source</strong>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Contributing to Go-based CLI tools and exploring new Kubernetes operators.</p>
+                </div>
+                <div class="hobby-item">
+                    <strong>Automation</strong>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">If I have to do it twice, I write a script for it (Python/Bash).</p>
+                </div>
+            </div>
+        </section>
+
+        <footer style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-default); text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+            <p>Interactive Portfolio • Built with Vanilla JS & GitHub Theme</p>
         </footer>
     </div>
 
+    <script>
+        // --- DATA: TECHNOLOGIES ---
+        const techs = [
+            { id: 'go', name: 'Golang', level: 'Advanced', desc: 'My primary language for backend services. Experienced with Goroutines, Channels, and building high-performance REST/gRPC APIs.' },
+            { id: 'react', name: 'React', level: 'Intermediate', desc: 'Used for building interactive UIs. Familiar with Hooks, Context API, and integration with TypeScript.' },
+            { id: 'postgres', name: 'PostgreSQL', level: 'Advanced', desc: 'Deep knowledge of indexing (B-Tree/GIN), Recursive CTEs, and relational schema design.' },
+            { id: 'k8s', name: 'Kubernetes', level: 'Intermediate', desc: 'Deploying services using Manifests and Helm. Comfortable with Pods, Services, and Ingress controllers.' },
+            { id: 'gitops', name: 'GitOps / ArgoCD', level: 'Intermediate', desc: 'Automating deployments. I treat infrastructure as code and use ArgoCD to sync state.' },
+            { id: 'docker', name: 'Docker', level: 'Advanced', desc: 'Containerizing full-stack apps. Optimizing multi-stage builds for small image sizes.' },
+            { id: 'python', name: 'Python', level: 'Competent', desc: 'Used primarily for scripting, automation, and backend prototypes.' },
+            { id: 'redis', name: 'Redis', level: 'Competent', desc: 'Caching layers and session management.' },
+            { id: 'react-native', name: 'React Native', level: 'Competent', desc: 'Building cross-platform mobile apps using the same React paradigms.' }
+        ];
+
+        // --- DATA: PROJECTS ---
+        const projects = [
+            {
+                title: "Cloud Storage Engine",
+                desc: "A distributed file storage system (G-Drive clone). Features streaming I/O for large files and Recursive CTEs for folder structures.",
+                stack: ['go', 'postgres', 'docker', 'gitops'],
+                link: "#"
+            },
+            {
+                title: "DevOps Dashboard",
+                desc: "Internal tool to monitor deployment status. Connects to Kubernetes API to visualize Pod health.",
+                stack: ['react', 'k8s', 'python'],
+                link: "#"
+            },
+            {
+                title: "Mobile Task Manager",
+                desc: "Cross-platform mobile app for task tracking with offline sync capabilities.",
+                stack: ['react-native', 'redis', 'go'],
+                link: "#"
+            },
+            {
+                title: "Personal Portfolio v1",
+                desc: "Simple static site deployed via GitActions.",
+                stack: ['react', 'gitops'],
+                link: "#"
+            }
+        ];
+
+        // --- RENDER FUNCTIONS ---
+
+        const techGrid = document.getElementById('tech-grid');
+        const projectsGrid = document.getElementById('projects-grid');
+        const detailPanel = document.getElementById('skill-detail-panel');
+
+        // 1. Render Tech Buttons
+        techs.forEach(tech => {
+            const btn = document.createElement('div');
+            btn.className = 'tech-btn';
+            btn.innerText = tech.name;
+            btn.onclick = () => selectTech(tech.id);
+            btn.id = `btn-${tech.id}`;
+            techGrid.appendChild(btn);
+        });
+
+        // 2. Render Projects (Initial Load: All)
+        renderProjects('all');
+
+        function renderProjects(filterId) {
+            projectsGrid.innerHTML = ''; // Clear current
+            let visibleCount = 0;
+
+            projects.forEach(proj => {
+                // Check if project contains the filtered tech (or if filter is 'all')
+                if (filterId === 'all' || proj.stack.includes(filterId)) {
+                    visibleCount++;
+                    const card = document.createElement('div');
+                    card.className = 'project-card';
+                    
+                    // Create Tech Tags for the card
+                    const tagsHtml = proj.stack.map(techId => {
+                        const techName = techs.find(t => t.id === techId)?.name || techId;
+                        return `<span class="mini-tag" onclick="event.stopPropagation(); jumpToTech('${techId}')">${techName}</span>`;
+                    }).join('');
+
+                    card.innerHTML = `
+                        <a href="${proj.link}" class="project-title">${proj.title}</a>
+                        <p class="project-desc">${proj.desc}</p>
+                        <div class="project-tags">${tagsHtml}</div>
+                    `;
+                    projectsGrid.appendChild(card);
+                }
+            });
+
+            // Show "No projects" message if empty
+            document.getElementById('no-projects-msg').classList.toggle('hidden', visibleCount > 0);
+        }
+
+        // --- INTERACTION LOGIC ---
+
+        function selectTech(techId) {
+            // 1. Highlight Button
+            document.querySelectorAll('.tech-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`btn-${techId}`).classList.add('active');
+
+            // 2. Show Detail Panel
+            const tech = techs.find(t => t.id === techId);
+            if (tech) {
+                document.getElementById('panel-title').innerText = tech.name;
+                document.getElementById('panel-level').innerText = tech.level;
+                document.getElementById('panel-desc').innerText = tech.desc;
+                detailPanel.style.display = 'block';
+            }
+
+            // 3. Filter Projects
+            renderProjects(techId);
+        }
+
+        function jumpToTech(techId) {
+            // Scroll up to tech section
+            document.getElementById('tech').scrollIntoView({ behavior: 'smooth' });
+            // Select the tech
+            selectTech(techId);
+        }
+
+        function resetFilter() {
+            document.querySelectorAll('.tech-btn').forEach(b => b.classList.remove('active'));
+            detailPanel.style.display = 'none';
+            renderProjects('all');
+        }
+
+    </script>
 </body>
 </html>
