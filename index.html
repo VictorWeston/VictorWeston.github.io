@@ -3,22 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample HTML Page</title>
+    <title>Portfolio | Full Stack & Cloud Engineer</title>
+    <style>
+        :root {
+            /* GitHub Dark Mode Color Palette */
+            --bg-canvas: #0d1117;
+            --bg-card: #161b22;
+            --border-default: #30363d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --btn-bg: #21262d;
+            --btn-hover: #30363d;
+            --skill-tag-bg: rgba(56, 139, 253, 0.15);
+            --skill-tag-text: #58a6ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            background-color: var(--bg-canvas);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* Header Section */
+        header {
+            border-bottom: 1px solid var(--border-default);
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .role {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .bio {
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            background-color: var(--btn-bg);
+            border: 1px solid var(--border-default);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--btn-hover);
+            border-color: var(--text-muted);
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border-default);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background-color: var(--skill-tag-bg);
+            color: var(--skill-tag-text);
+            padding: 3px 10px;
+            border-radius: 2em;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Projects Cards */
+        .project-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .project-tech {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        .project-desc {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .project-bullets {
+            list-style-position: inside;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .project-bullets li {
+            margin-bottom: 0.25rem;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-default);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .project-header { flex-direction: column; gap: 0.25rem; }
+            body { padding: 1rem; }
+        }
+    </style>
 </head>
 <body>
 
-    <h1>This Is a Main Heading</h1>
-    <p>This is a simple paragraph with <b>bold</b> and <i>italic</i> text.</p>
+    <div class="container">
+        <header>
+            <h1>Hello, I'm [Your Name]</h1>
+            <div class="role">Full Stack & Cloud Native Engineer</div>
+            <p class="bio">
+                Developer with 2 years of experience specializing in the intersection of <strong>Product (React)</strong> and <strong>Platform (Golang/K8s)</strong>. 
+                I build high-performance systems and the GitOps pipelines that deploy them.
+            </p>
+            <div class="btn-group">
+                <a href="https://github.com/[your-username]" class="btn">GitHub</a>
+                <a href="mailto:your-email@example.com" class="btn">Contact Me</a>
+            </div>
+        </header>
 
-    <h2>A Sub-Heading</h2>
-    <p>You can create links to other websites, like this one for [W3Schools](www.w3schools.com).</p>
+        <section>
+            <h2>Technical Stack</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Backend & Systems</h3>
+                    <div class="tags">
+                        <span class="tag">Golang</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Redis</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>DevOps & Cloud</h3>
+                    <div class="tags">
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">ArgoCD</span>
+                        <span class="tag">GitOps</span>
+                        <span class="tag">Nginx</span>
+                    </div>
+                </div>
 
-    <h3>A List of Items</h3>
-    <ul>
-        <li>First item in an unordered list</li>
-        <li>Second item</li>
-        <li>Third item</li>
-    </ul>
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <div class="tags">
+                        <span class="tag">React</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">React Native</span>
+                        <span class="tag">Plasmo</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Featured Engineering</h2>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <span class="project-title">High-Performance Cloud Storage Engine</span>
+                    <span class="project-tech">Go • Postgres • Docker • Streaming I/O</span>
+                </div>
+                <p class="project-desc">
+                    A distributed file storage system modeled after Google Drive architecture. 
+                    Moved beyond standard CRUD by implementing streaming file uploads and recursive database logic.
+                </p>
+                <ul class="project-bullets">
+                    <li>Engineered <strong>streaming I/O</strong> pipelines in Go to handle large binary uploads with minimal RAM footprint.</li>
+                    <li>Designed a hierarchical file system in <strong>PostgreSQL</strong> using <strong>Recursive CTEs</strong> for O(1) folder traversal.</li>
+                    <li>Implemented full-text search and indexing strategies for efficient file retrieval.</li>
+                    <li>Containerized with <strong>Docker</strong> and deployed via a custom <strong>GitOps</strong> workflow.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>About Me</h2>
+            <p style="color: var(--text-muted);">
+                I am a "T-shaped" developer. While I can build sleek UIs with <strong>React and React Native</strong>, my passion lies in what happens under the hood. 
+                I have spent the last 2 years deep-diving into <strong>Golang</strong> concurrency patterns and modern <strong>GitOps</strong> deployments (ArgoCD, K8s).
+                <br><br>
+                Currently exploring: <strong>Vector Databases (pgvector)</strong> and AI-driven search architectures.
+            </p>
+        </section>
+
+        <footer>
+            <p>Built with plain HTML & CSS • Modeled after GitHub Dark UI</p>
+        </footer>
+    </div>
 
 </body>
 </html>
